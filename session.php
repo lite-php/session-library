@@ -150,6 +150,15 @@ class Session_Library
 	}
 
 	/**
+	 * Remove a value from the session
+	 * @param  strint $key     the index of the value to be removed
+	 */
+	public function remove($key)
+	{
+		unset($_SESSION[$key]);
+	}
+
+	/**
 	 * Returna value using the magic __get call
 	 * @param  string $key Index used to get the value
 	 * @return *
