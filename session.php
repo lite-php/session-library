@@ -117,6 +117,15 @@ class Session_Library
 	}
 
 	/**
+	 * Return the session ID of the current client
+	 * @return string Session Identifier
+	 */
+	public function id()
+	{
+		return session_id();
+	}
+
+	/**
 	 * Set a value in the session
 	 * @param string $key     Index used to store the value.
 	 * @param    *   $value   A serializable value to be stored.
