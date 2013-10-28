@@ -130,9 +130,17 @@ class Session_Library
 	 * @param string $key     Index used to store the value.
 	 * @param    *   $value   A serializable value to be stored.
 	 */
-	public function set($key, $value)
+	public function set($key, $value, $namespace = "default")
 	{
-		$_SESSION[$key] = $value;
+		/**
+		 * Make sure the namespace exists
+		 */
+		$_SESSION[$namespace] = isset($_SESSION[$namespace]) ? $_SESSION[$namespace] : array();
+
+		/**
+		 * Store the key/value in the session
+		 */
+		$_SESSION[$namespace][$key] = $value;
 	}
 
 	/**
@@ -140,12 +148,14 @@ class Session_Library
 	 * @param  strint $key     the index of the stored value
 	 * @return *
 	 */
-	public function get($key)
+	public function get($key, $namespace = "default")
 	{
-		if($this->exists($key))
+		if($this->exists($key, $namespace))
 		{
-			return $_SESSION[$key];
+			return $_SESSION[$namespace][$key];
 		}
+
+		return null;
 	}
 
 	/**
@@ -153,18 +163,27 @@ class Session_Library
 	 * @param  strint $key     the index of the stored value
 	 * @return *
 	 */
-	public function exists($key)
+	public function exists($key, $namespace = "default")
 	{
-		return array_key_exists($key, $_SESSION);
+		return array_key_exists($namespace, $_SESSION) && array_key_exists($key, $_SESSION[$namespace]);
 	}
 
 	/**
 	 * Remove a value from the session
 	 * @param  strint $key     the index of the value to be removed
 	 */
-	public function remove($key)
+	public function remove($key, $namespace = "default")
 	{
-		unset($_SESSION[$key]);
+		unset($_SESSION[$namespace][$key]);
+	}
+
+	/**
+	 * Remove a value from the session
+	 * @param  strint $key     the index of the value to be removed
+	 */
+	public function removeNamespace($namespace)
+	{
+		unset($_SESSION[$namespace]);
 	}
 
 	/**
