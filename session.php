@@ -178,6 +178,14 @@ class Session_Library
 	}
 
 	/**
+	 * Destroy a session.
+	 */
+	public function destroy()
+	{
+		session_destroy();
+	}
+
+	/**
 	 * Remove a value from the session
 	 * @param  strint $key     the index of the value to be removed
 	 */
