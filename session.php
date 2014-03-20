@@ -111,6 +111,20 @@ class Session_Library
 		}
 
 		/**
+		 * Set the session cookie parameters
+		 */
+		if(isset($this->_config->cookie_params) && is_array($this->_config->cookie_params))
+		{
+			session_set_cookie_params(
+				$this->_config->cookie_params['lifetime'],
+				$this->_config->cookie_params['path'],
+				$this->_config->cookie_params['domain'],
+				$this->_config->cookie_params['secure'],
+				$this->_config->cookie_params['httponly']
+			);
+		}
+
+		/**
 		 * Start the session
 		 */
 		session_start($this->_config->name);
