@@ -74,7 +74,7 @@ class Session_Library_Driver_Model implements SessionHandlerInterface
 	 */
 	public function gc($maxlifetime)
 	{
-		return $this->model->close($maxlifetime);
+		return $this->model->gc($maxlifetime);
 	}
 
 	/**
